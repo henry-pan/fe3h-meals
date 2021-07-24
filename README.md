@@ -1,3 +1,3 @@
-# Fire Emblem Three Houses Shared Meal Finder
+# Shared Meal Finder
 
-A simple app to find a common liked meal given two characters.
+A simple webapp to find a common liked meal given two characters in Fire Emblem Three Houses.
