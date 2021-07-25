@@ -14,4 +14,4 @@ Simply click the checkboxes for two characters and the webapp will display the l
 
 Meal data obtained from [Serenes Forest](https://serenesforest.net/three-houses/monastery/dining-hall/).
 
-Fire Emblem is property of Nintendo
+Fire Emblem and related images are property of Nintendo and Intelligent Systems.

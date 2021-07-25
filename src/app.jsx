@@ -52,7 +52,7 @@ class App extends React.Component {
     const lions=["Dimitri","Dedue","Felix","Ashe","Sylvain","Mercedes","Annette","Ingrid"];
     const deer=["Claude","Lorenz","Raphael","Ignatz","Lysithea","Marianne","Hilda","Leonie"];
     const church=["Seteth","Flayn","Hanneman","Manuela","Gilbert","Alois","Catherine","Shamir","Cyril"];
-    const dlc=["Jeritza","Anna","Yuri","Balthus","Constance","Hapi"];
+    const dlc=["Yuri","Balthus","Constance","Hapi","Jeritza","Anna"];
 
     let mealSection;
     if (this.state.selectedChars.length === 2){
@@ -72,23 +72,23 @@ class App extends React.Component {
         <p>Click on two characters to determine which meals they both like.</p>
         <div className="character-tables">
           <div>
-            <h3>Black Eagles</h3>
+            <h3><img className="faction-banner" src="img/be.png" />Black Eagles</h3>
             {this.mapChars(eagles)}
           </div>
           <div>
-            <h3>Blue Lions</h3>
+            <h3><img className="faction-banner" src="img/bl.png" />Blue Lions</h3>
             {this.mapChars(lions)}
           </div>
           <div>
-            <h3>Golden Deer</h3>
+            <h3><img className="faction-banner" src="img/gd.png" />Golden Deer</h3>
             {this.mapChars(deer)}
           </div>
           <div>
-            <h3>Church of Seiros</h3>
+            <h3><img className="faction-banner" src="img/church.png" />Church of Seiros</h3>
             {this.mapChars(church)}
           </div>
           <div>
-            <h3>Ashen Wolves / DLC</h3>
+            <h3><img className="faction-banner" src="img/aw.png" />Ashen Wolves / DLC</h3>
             {this.mapChars(dlc)}
           </div>
         </div>
