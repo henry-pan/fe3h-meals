@@ -45,15 +45,39 @@ var App = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(App);
 
   function App(props) {
+    var _this;
+
     _classCallCheck(this, App);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      char1: "",
+      char2: ""
+    };
+    return _this;
   }
 
   _createClass(App, [{
+    key: "findMeals",
+    value: function findMeals(char1, char2) {
+      var mealHash = {};
+      var sharedMeals = [];
+      _data_js__WEBPACK_IMPORTED_MODULE_1__.characters[char1].forEach(function (meal) {
+        return mealHash[meal] = true;
+      });
+      _data_js__WEBPACK_IMPORTED_MODULE_1__.characters[char2].forEach(function (meal) {
+        if (mealHash[meal]) sharedMeals.push(meal);
+      });
+      return sharedMeals.map(function (i) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: i
+        }, i);
+      });
+    }
+  }, {
     key: "mapChars",
     value: function mapChars(arr) {
-      return Object.keys(arr).map(function (i) {
+      return arr.map(function (i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           key: i
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
@@ -64,7 +88,14 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Shared Meal Finder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.mapChars(_data_js__WEBPACK_IMPORTED_MODULE_1__.characters)));
+      var eagles = ["Edelgard", "Hubert", "Ferdinand", "Linhardt", "Caspar", "Bernadetta", "Dorothea", "Petra"];
+      var lions = ["Dimitri", "Dedue", "Felix", "Ashe", "Sylvain", "Mercedes", "Annette", "Ingrid"];
+      var deer = ["Claude", "Lorenz", "Raphael", "Ignatz", "Lysithea", "Marianne", "Hilda", "Leonie"];
+      var church = ["Seteth", "Flayn", "Hanneman", "Manuela", "Gilbert", "Alois", "Catherine", "Shamir", "Cyril"];
+      var dlc = ["Jeritza", "Anna", "Yuri", "Balthus", "Constance", "Hapi"];
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Shared Meal Finder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Meals:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, this.findMeals("Felix", "Ingrid")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "character-tables"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Black Eagles"), this.mapChars(eagles)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Blue Lions"), this.mapChars(lions)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Golden Deer"), this.mapChars(deer)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Church of Seiros"), this.mapChars(church)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Ashen Wolves / DLC"), this.mapChars(dlc))));
     }
   }]);
 
