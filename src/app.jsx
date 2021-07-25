@@ -5,9 +5,19 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      char1: "",
-      char2: ""
+      selectedChars: []
     }
+  }
+
+  handleCheckbox(char) {
+    const newChars = [...this.state.selectedChars];
+    if (newChars.includes(char)) {
+      const index = newChars.indexOf(char);
+      newChars.splice(index, 1);
+    } else {
+      newChars.push(char);
+    }
+    this.setState({ selectedChars: [...newChars] });
   }
 
   findMeals(char1, char2) {
@@ -28,7 +38,9 @@ class App extends React.Component {
     return arr.map(i => 
       <div key={i}>
         <label>
-          <input type="checkbox" />
+          <input type="checkbox"
+            onChange={() => this.handleCheckbox(i)}
+            disabled={!this.state.selectedChars.includes(i) && this.state.selectedChars.length >= 2}/>
           {i}
         </label>
       </div>
@@ -42,13 +54,14 @@ class App extends React.Component {
     const church=["Seteth","Flayn","Hanneman","Manuela","Gilbert","Alois","Catherine","Shamir","Cyril"];
     const dlc=["Jeritza","Anna","Yuri","Balthus","Constance","Hapi"];
 
+    let meals;
+    if (this.state.selectedChars.length === 2){
+      meals = this.findMeals(this.state.selectedChars[0], this.state.selectedChars[1]);
+    }
+
     return (
       <>
       <h1>Shared Meal Finder</h1>
-      <h2>Meals:</h2>
-      <ul>
-        {this.findMeals("Felix","Ingrid")}
-      </ul>
       <div className="character-tables">
         <div>
           <h3>Black Eagles</h3>
@@ -71,6 +84,10 @@ class App extends React.Component {
           {this.mapChars(dlc)}
         </div>
       </div>
+      <h2>Meals:</h2>
+      <ul>
+        {meals}
+      </ul>
       </>
     )
   }
