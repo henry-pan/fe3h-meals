@@ -9,6 +9,7 @@ class App extends React.Component {
     }
   }
 
+
   handleCheckbox(char) {
     const newChars = [...this.state.selectedChars];
     if (newChars.includes(char)) {
@@ -20,6 +21,7 @@ class App extends React.Component {
     this.setState({ selectedChars: [...newChars] });
   }
 
+
   findMeals(char1, char2) {
     const mealHash = {};
     const sharedMeals = [];
@@ -27,12 +29,9 @@ class App extends React.Component {
     characters[char2].forEach(meal => {
       if (mealHash[meal]) sharedMeals.push(meal);
     });
-    return sharedMeals.map(i => 
-      <li key={i}>
-        {i}
-      </li>
-    );
+    return sharedMeals.map(i => <li key={i}>{i}</li>);
   }
+
 
   mapChars(arr) {
     return arr.map(i => 
@@ -47,6 +46,7 @@ class App extends React.Component {
     )
   }
 
+
   render() {
     const eagles=["Edelgard","Hubert","Ferdinand","Linhardt","Caspar","Bernadetta","Dorothea","Petra"];
     const lions=["Dimitri","Dedue","Felix","Ashe","Sylvain","Mercedes","Annette","Ingrid"];
@@ -54,41 +54,46 @@ class App extends React.Component {
     const church=["Seteth","Flayn","Hanneman","Manuela","Gilbert","Alois","Catherine","Shamir","Cyril"];
     const dlc=["Jeritza","Anna","Yuri","Balthus","Constance","Hapi"];
 
-    let meals;
+    let mealSection;
     if (this.state.selectedChars.length === 2){
+      let meals;
       meals = this.findMeals(this.state.selectedChars[0], this.state.selectedChars[1]);
+      mealSection = (
+        <div className="meals">
+          <h2>{this.state.selectedChars[0]} and {this.state.selectedChars[1]} both like:</h2>
+          <ul>{meals}</ul>
+        </div>
+      );
     }
 
     return (
-      <>
-      <h1>Shared Meal Finder</h1>
-      <div className="character-tables">
-        <div>
-          <h3>Black Eagles</h3>
-          {this.mapChars(eagles)}
+      <div className="content">
+        <h1>Fire Emblem: Three Houses - Shared Meal Finder</h1>
+        <p>Click on two characters to determine which meals they both like.</p>
+        <div className="character-tables">
+          <div>
+            <h3>Black Eagles</h3>
+            {this.mapChars(eagles)}
+          </div>
+          <div>
+            <h3>Blue Lions</h3>
+            {this.mapChars(lions)}
+          </div>
+          <div>
+            <h3>Golden Deer</h3>
+            {this.mapChars(deer)}
+          </div>
+          <div>
+            <h3>Church of Seiros</h3>
+            {this.mapChars(church)}
+          </div>
+          <div>
+            <h3>Ashen Wolves / DLC</h3>
+            {this.mapChars(dlc)}
+          </div>
         </div>
-        <div>
-          <h3>Blue Lions</h3>
-          {this.mapChars(lions)}
-        </div>
-        <div>
-          <h3>Golden Deer</h3>
-          {this.mapChars(deer)}
-        </div>
-        <div>
-          <h3>Church of Seiros</h3>
-          {this.mapChars(church)}
-        </div>
-        <div>
-          <h3>Ashen Wolves / DLC</h3>
-          {this.mapChars(dlc)}
-        </div>
+        {mealSection}
       </div>
-      <h2>Meals:</h2>
-      <ul>
-        {meals}
-      </ul>
-      </>
     )
   }
 }
