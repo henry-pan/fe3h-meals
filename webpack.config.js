@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './frontend/meals.jsx',
+  entry: './src/shared_meals.jsx',
   output: {
     path: path.resolve(__dirname),
     filename: 'bundle.js'
