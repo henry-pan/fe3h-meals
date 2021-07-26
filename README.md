@@ -10,6 +10,10 @@ In FE3H, the player can dine with two characters among students and faculty in t
 
 Simply click the checkboxes for two characters and the webapp will display the list of meals that both characters like.
 
+## Future Features
+
+* After selecting the first character, display an icon on all characters that have supports with the selected character.
+
 ## Credits
 
 Meal data obtained from [Serenes Forest](https://serenesforest.net/three-houses/monastery/dining-hall/).
