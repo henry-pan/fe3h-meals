@@ -89,10 +89,10 @@ var App = /*#__PURE__*/function (_React$Component) {
     value: function findMeals(char1, char2) {
       var mealHash = {};
       var sharedMeals = [];
-      _data_js__WEBPACK_IMPORTED_MODULE_1__.characters[char1].forEach(function (meal) {
+      _data_js__WEBPACK_IMPORTED_MODULE_1__.characters[char1]["meals"].forEach(function (meal) {
         return mealHash[meal] = true;
       });
-      _data_js__WEBPACK_IMPORTED_MODULE_1__.characters[char2].forEach(function (meal) {
+      _data_js__WEBPACK_IMPORTED_MODULE_1__.characters[char2]["meals"].forEach(function (meal) {
         if (mealHash[meal]) sharedMeals.push(meal);
       });
       if (sharedMeals.length === 0) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "None!");
@@ -107,18 +107,24 @@ var App = /*#__PURE__*/function (_React$Component) {
     value: function mapChars(arr) {
       var _this2 = this;
 
-      var picked = this.state.selectedChars.length >= 2;
+      var selectedChars = this.state.selectedChars;
+      var isPicked = selectedChars.length >= 2;
+      var isFirstPick = selectedChars[0] && !selectedChars[1]; // Hides supports after picking second character
+
       return arr.map(function (i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: !_this2.state.selectedChars.includes(i) && picked ? "character disabled" : "character",
+          className: !selectedChars.includes(i) && isPicked ? "character disabled" : "character",
           key: i
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "checkbox",
           onChange: function onChange() {
             return _this2.handleCheckbox(i);
           },
-          disabled: !_this2.state.selectedChars.includes(i) && picked
-        }), i));
+          disabled: !selectedChars.includes(i) && isPicked
+        }), i, isFirstPick && _data_js__WEBPACK_IMPORTED_MODULE_1__.characters[selectedChars[0]]["supports"].includes(i) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          className: "support-icon",
+          src: "img/support.png"
+        })));
       });
     }
   }, {
@@ -143,7 +149,7 @@ var App = /*#__PURE__*/function (_React$Component) {
         className: "content"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: "img/meal.png"
-      }), "Shared Meal Finder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Click on two characters to determine which meals they both like.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
+      }), "Shared Meal Finder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Click on two characters to determine which meals they both like."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "After clicking on the first character, an icon will appear on all characters they can support.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
         className: "character-tables-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "character-table"
@@ -202,45 +208,162 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "characters": () => (/* binding */ characters)
 /* harmony export */ });
 var characters = {
-  'Edelgard': ['Saghert and Cream', 'Sweet Bun Trio', 'Peach Sorbet', 'Vegetable Pasta Salad', 'Onion Gratin Soup', 'Vegetable Stir-Fry', 'Fish and Bean Soup', 'Fish Sandwich', 'Sautéed Pheasant and Eggs'],
-  'Hubert': ['Two-Fish Sauté', 'Sautéed Jerky', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté', 'Super-Spicy Fish Dango', 'Sautéed Pheasant and Eggs', 'Garreg Mach Meat Pie', 'Cheesy Verona Stew', 'Pickled Seafood and Vegetables', 'Gautier Cheese Gratin', 'Cabbage and Herring Stew'],
-  'Ferdinand': ['Saghert and Cream', 'Sweet Bun Trio', 'Pheasant Roast with Berry Sauce', 'Daphnel Stew', 'Vegetable Pasta Salad', 'Onion Gratin Soup', 'Vegetable Stir-Fry', 'Grilled Herring', 'Fruit and Herring Tart', 'Fisherman’s Bounty', 'Fish Sandwich', 'Bourgeois Pike', 'Sautéed Pheasant and Eggs'],
-  'Linhardt': ['Saghert and Cream', 'Sweet Bun Trio', 'Pheasant Roast with Berry Sauce', 'Peach Sorbet', 'Daphnel Stew', 'Onion Gratin Soup', 'Fish and Bean Soup', 'Garreg Mach Meat Pie', 'Gautier Cheese Gratin'],
-  'Caspar': ['Sweet Bun Trio', 'Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Daphnel Stew', 'Gronder Meat Skewers', 'Derdriu-Style Fried Pheasant', 'Vegetable Pasta Salad', 'Country-Style Red Turnip Plate', 'Vegetable Stir-Fry', 'Sautéed Jerky', 'Sautéed Pheasant and Eggs', 'Garreg Mach Meat Pie'],
-  'Bernadetta': ['Saghert and Cream', 'Sweet Bun Trio', 'Peach Sorbet', 'Derdriu-Style Fried Pheasant', 'Vegetable Pasta Salad', 'Country-Style Red Turnip Plate', 'Vegetable Stir-Fry', 'Fruit and Herring Tart', 'Two-Fish Sauté', 'Bourgeois Pike', 'Cheesy Verona Stew'],
-  'Dorothea': ['Saghert and Cream', 'Peach Sorbet', 'Vegetable Pasta Salad', 'Onion Gratin Soup', 'Country-Style Red Turnip Plate', 'Vegetable Stir-Fry', 'Garreg Mach Meat Pie', 'Gautier Cheese Gratin'],
-  'Petra': ['Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Daphnel Stew', 'Gronder Meat Skewers', 'Country-Style Red Turnip Plate', 'Vegetable Stir-Fry', 'Grilled Herring', 'Fisherman’s Bounty', 'Fish Sandwich', 'Sautéed Jerky', 'Spicy Fish and Turnip Stew', 'Super-Spicy Fish Dango', 'Cheesy Verona Stew', 'Pickled Seafood and Vegetables'],
-  'Dimitri': ['Saghert and Cream', 'Sweet Bun Trio', 'Onion Gratin Soup', 'Sautéed Jerky', 'Cheesy Verona Stew', 'Gautier Cheese Gratin'],
-  'Dedue': ['Daphnel Stew', 'Onion Gratin Soup', 'Vegetable Stir-Fry', 'Grilled Herring', 'Fish and Bean Soup', 'Fruit and Herring Tart', 'Fisherman’s Bounty', 'Fish Sandwich', 'Two-Fish Sauté', 'Bourgeois Pike', 'Sautéed Jerky', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté', 'Super-Spicy Fish Dango', 'Pickled Seafood and Vegetables'],
-  'Felix': ['Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Daphnel Stew', 'Gronder Meat Skewers', 'Derdriu-Style Fried Pheasant', 'Two-Fish Sauté', 'Sautéed Jerky', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté', 'Super-Spicy Fish Dango', 'Sautéed Pheasant and Eggs', 'Garreg Mach Meat Pie', 'Gautier Cheese Gratin'],
-  'Ashe': ['Saghert and Cream', 'Sweet Bun Trio', 'Pheasant Roast with Berry Sauce', 'Peach Sorbet', 'Vegetable Pasta Salad', 'Fish and Bean Soup', 'Fish Sandwich', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté'],
-  'Sylvain': ['Sweet Bun Trio', 'Pheasant Roast with Berry Sauce', 'Fish and Bean Soup', 'Fruit and Herring Tart', 'Fish Sandwich', 'Two-Fish Sauté', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté', 'Super-Spicy Fish Dango', 'Sautéed Pheasant and Eggs', 'Garreg Mach Meat Pie', 'Cheesy Verona Stew'],
-  'Mercedes': ['Saghert and Cream', 'Sweet Bun Trio', 'Pheasant Roast with Berry Sauce', 'Peach Sorbet', 'Vegetable Pasta Salad', 'Onion Gratin Soup', 'Grilled Herring', 'Fish and Bean Soup', 'Fruit and Herring Tart', 'Two-Fish Sauté'],
-  'Annette': ['Saghert and Cream', 'Sweet Bun Trio', 'Pheasant Roast with Berry Sauce', 'Peach Sorbet', 'Vegetable Pasta Salad', 'Onion Gratin Soup', 'Vegetable Stir-Fry', 'Grilled Herring', 'Fish and Bean Soup', 'Fruit and Herring Tart', 'Two-Fish Sauté', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté', 'Pickled Seafood and Vegetables'],
-  'Ingrid': ['Sweet Bun Trio', 'Pheasant Roast with Berry Sauce', 'Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Daphnel Stew', 'Gronder Meat Skewers', 'Derdriu-Style Fried Pheasant', 'Vegetable Pasta Salad', 'Grilled Herring', 'Fruit and Herring Tart', 'Fisherman’s Bounty', 'Fish Sandwich', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté', 'Super-Spicy Fish Dango'],
-  'Claude': ['Pheasant Roast with Berry Sauce', 'Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Daphnel Stew', 'Gronder Meat Skewers', 'Derdriu-Style Fried Pheasant', 'Onion Gratin Soup', 'Country-Style Red Turnip Plate', 'Vegetable Stir-Fry', 'Bourgeois Pike', 'Sautéed Jerky', 'Sautéed Pheasant and Eggs', 'Garreg Mach Meat Pie', 'Cheesy Verona Stew', 'Gautier Cheese Gratin', 'Cabbage and Herring Stew'],
-  'Lorenz': ['Saghert and Cream', 'Daphnel Stew', 'Onion Gratin Soup', 'Fish and Bean Soup', 'Fruit and Herring Tart', 'Two-Fish Sauté', 'Bourgeois Pike', 'Garreg Mach Meat Pie', 'Cabbage and Herring Stew'],
-  'Raphael': ['Pheasant Roast with Berry Sauce', 'Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Daphnel Stew', 'Gronder Meat Skewers', 'Derdriu-Style Fried Pheasant', 'Country-Style Red Turnip Plate', 'Fish and Bean Soup', 'Fisherman’s Bounty', 'Fish Sandwich', 'Sautéed Jerky', 'Sautéed Pheasant and Eggs', 'Garreg Mach Meat Pie', 'Cheesy Verona Stew', 'Pickled Seafood and Vegetables', 'Gautier Cheese Gratin'],
-  'Ignatz': ['Saghert and Cream', 'Sweet Bun Trio', 'Vegetable Pasta Salad', 'Vegetable Stir-Fry', 'Fish and Bean Soup', 'Fruit and Herring Tart', 'Fisherman’s Bounty', 'Two-Fish Sauté', 'Bourgeois Pike', 'Super-Spicy Fish Dango', 'Sautéed Pheasant and Eggs', 'Garreg Mach Meat Pie', 'Cabbage and Herring Stew'],
-  'Lysithea': ['Saghert and Cream', 'Sweet Bun Trio', 'Pheasant Roast with Berry Sauce', 'Peach Sorbet', 'Pickled Rabbit Skewers', 'Derdriu-Style Fried Pheasant', 'Two-Fish Sauté'],
-  'Marianne': ['Saghert and Cream', 'Sweet Bun Trio', 'Peach Sorbet', 'Vegetable Pasta Salad', 'Onion Gratin Soup', 'Vegetable Stir-Fry', 'Fish and Bean Soup', 'Fruit and Herring Tart', 'Fisherman’s Bounty', 'Two-Fish Sauté', 'Bourgeois Pike', 'Super-Spicy Fish Dango', 'Sautéed Pheasant and Eggs', 'Cheesy Verona Stew', 'Cabbage and Herring Stew'],
-  'Hilda': ['Saghert and Cream', 'Sweet Bun Trio', 'Peach Sorbet', 'Derdriu-Style Fried Pheasant', 'Country-Style Red Turnip Plate', 'Fish and Bean Soup', 'Fisherman’s Bounty', 'Two-Fish Sauté', 'Cheesy Verona Stew', 'Gautier Cheese Gratin'],
-  'Leonie': ['Beast Meat Teppanyaki', 'Daphnel Stew', 'Gronder Meat Skewers', 'Derdriu-Style Fried Pheasant', 'Onion Gratin Soup', 'Vegetable Stir-Fry', 'Grilled Herring', 'Fish and Bean Soup', 'Fruit and Herring Tart', 'Fisherman’s Bounty', 'Fish Sandwich', 'Two-Fish Sauté', 'Bourgeois Pike', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté', 'Super-Spicy Fish Dango', 'Cheesy Verona Stew', 'Pickled Seafood and Vegetables', 'Cabbage and Herring Stew'],
-  'Seteth': ['Daphnel Stew', 'Derdriu-Style Fried Pheasant', 'Vegetable Pasta Salad', 'Grilled Herring', 'Fruit and Herring Tart', 'Fish Sandwich', 'Bourgeois Pike', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté', 'Super-Spicy Fish Dango', 'Sautéed Pheasant and Eggs', 'Cheesy Verona Stew', 'Pickled Seafood and Vegetables'],
-  'Flayn': ['Saghert and Cream', 'Sweet Bun Trio', 'Pheasant Roast with Berry Sauce', 'Peach Sorbet', 'Onion Gratin Soup', 'Country-Style Red Turnip Plate', 'Grilled Herring', 'Fish and Bean Soup', 'Fruit and Herring Tart', 'Fisherman’s Bounty', 'Fish Sandwich', 'Two-Fish Sauté', 'Bourgeois Pike', 'Cheesy Verona Stew', 'Pickled Seafood and Vegetables', 'Cabbage and Herring Stew'],
-  'Hanneman': ['Peach Sorbet', 'Derdriu-Style Fried Pheasant', 'Vegetable Pasta Salad', 'Two-Fish Sauté', 'Bourgeois Pike', 'Super-Spicy Fish Dango', 'Garreg Mach Meat Pie', 'Cheesy Verona Stew', 'Pickled Seafood and Vegetables', 'Gautier Cheese Gratin', 'Cabbage and Herring Stew'],
-  'Manuela': ['Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Daphnel Stew', 'Gronder Meat Skewers', 'Derdriu-Style Fried Pheasant', 'Vegetable Stir-Fry', 'Fish and Bean Soup', 'Fisherman’s Bounty', 'Fish Sandwich', 'Two-Fish Sauté', 'Bourgeois Pike', 'Sautéed Jerky', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté', 'Super-Spicy Fish Dango', 'Sautéed Pheasant and Eggs', 'Garreg Mach Meat Pie', 'Cabbage and Herring Stew'],
-  'Gilbert': ['Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Gronder Meat Skewers', 'Derdriu-Style Fried Pheasant', 'Vegetable Pasta Salad', 'Country-Style Red Turnip Plate', 'Vegetable Stir-Fry', 'Grilled Herring', 'Fisherman’s Bounty', 'Fish Sandwich', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté', 'Super-Spicy Fish Dango', 'Sautéed Pheasant and Eggs', 'Garreg Mach Meat Pie', 'Cheesy Verona Stew', 'Pickled Seafood and Vegetables', 'Cabbage and Herring Stew'],
-  'Alois': ['Saghert and Cream', 'Sweet Bun Trio', 'Pheasant Roast with Berry Sauce', 'Peach Sorbet', 'Onion Gratin Soup', 'Grilled Herring', 'Fish and Bean Soup', 'Fruit and Herring Tart', 'Fisherman’s Bounty', 'Fish Sandwich', 'Two-Fish Sauté', 'Bourgeois Pike', 'Pickled Seafood and Vegetables'],
-  'Catherine': ['Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Gronder Meat Skewers', 'Derdriu-Style Fried Pheasant', 'Onion Gratin Soup', 'Country-Style Red Turnip Plate', 'Grilled Herring', 'Fruit and Herring Tart', 'Fisherman’s Bounty', 'Fish Sandwich', 'Two-Fish Sauté', 'Bourgeois Pike', 'Super-Spicy Fish Dango', 'Garreg Mach Meat Pie', 'Cheesy Verona Stew', 'Pickled Seafood and Vegetables', 'Gautier Cheese Gratin', 'Cabbage and Herring Stew'],
-  'Shamir': ['Pheasant Roast with Berry Sauce', 'Peach Sorbet', 'Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Daphnel Stew', 'Gronder Meat Skewers', 'Vegetable Pasta Salad', 'Country-Style Red Turnip Plate', 'Vegetable Stir-Fry', 'Sautéed Jerky', 'Super-Spicy Fish Dango', 'Sautéed Pheasant and Eggs'],
-  'Cyril': ['Pheasant Roast with Berry Sauce', 'Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Daphnel Stew', 'Gronder Meat Skewers', 'Derdriu-Style Fried Pheasant', 'Vegetable Pasta Salad', 'Vegetable Stir-Fry', 'Fish and Bean Soup', 'Two-Fish Sauté', 'Sautéed Jerky', 'Sautéed Pheasant and Eggs'],
-  'Jeritza': ['Saghert and Cream', 'Sweet Bun Trio', 'Pheasant Roast with Berry Sauce', 'Peach Sorbet', 'Gronder Meat Skewers', 'Onion Gratin Soup', 'Grilled Herring', 'Fish and Bean Soup', 'Fisherman’s Bounty', 'Two-Fish Sauté', 'Cabbage and Herring Stew', 'Small Fish Skewers', 'Fried Crayfish'],
-  'Anna': ['Pheasant Roast with Berry Sauce', 'Peach Sorbet', 'Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Derdriu-Style Fried Pheasant', 'Vegetable Pasta Salad', 'Bourgeois Pike', 'Sautéed Jerky', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté', 'Sautéed Pheasant and Eggs', 'Pickled Seafood and Vegetables', 'Fried Crayfish'],
-  'Yuri': ['Saghert and Cream', 'Sweet Bun Trio', 'Pheasant Roast with Berry Sauce', 'Peach Sorbet', 'Pickled Rabbit Skewers', 'Daphnel Stew', 'Onion Gratin Soup', 'Country-Style Red Turnip Plate', 'Vegetable Stir-Fry', 'Grilled Herring', 'Fish and Bean Soup', 'Fisherman’s Bounty', 'Fish Sandwich', 'Two-Fish Sauté', 'Sautéed Jerky'],
-  'Balthus': ['Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Daphnel Stew', 'Gronder Meat Skewers', 'Derdriu-Style Fried Pheasant', 'Fisherman’s Bounty', 'Sautéed Jerky', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté', 'Super-Spicy Fish Dango', 'Garreg Mach Meat Pie', 'Cheesy Verona Stew', 'Gautier Cheese Gratin', 'Cabbage and Herring Stew'],
-  'Constance': ['Saghert and Cream', 'Sweet Bun Trio', 'Pheasant Roast with Berry Sauce', 'Peach Sorbet', 'Vegetable Pasta Salad', 'Fruit and Herring Tart', 'Two-Fish Sauté', 'Bourgeois Pike', 'Sautéed Pheasant and Eggs'],
-  'Hapi': ['Pheasant Roast with Berry Sauce', 'Beast Meat Teppanyaki', 'Pickled Rabbit Skewers', 'Daphnel Stew', 'Gronder Meat Skewers', 'Derdriu-Style Fried Pheasant', 'Onion Gratin Soup', 'Country-Style Red Turnip Plate', 'Vegetable Stir-Fry', 'Fish and Bean Soup', 'Fisherman’s Bounty', 'Fish Sandwich', 'Sautéed Jerky', 'Spicy Fish and Turnip Stew', 'Sweet and Salty Whitefish Sauté', 'Super-Spicy Fish Dango', 'Sautéed Pheasant and Eggs', 'Pickled Seafood and Vegetables', 'Cabbage and Herring Stew', 'Small Fish Skewers', 'Fried Crayfish']
+  "Edelgard": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Peach Sorbet", "Vegetable Pasta Salad", "Onion Gratin Soup", "Vegetable Stir-Fry", "Fish and Bean Soup", "Fish Sandwich", "Sautéed Pheasant and Eggs"],
+    "supports": ["Hubert", "Ferdinand", "Linhardt", "Caspar", "Bernadetta", "Dorothea", "Petra", "Lysithea", "Hanneman", "Manuela", "Constance"]
+  },
+  "Hubert": {
+    "meals": ["Two-Fish Sauté", "Sautéed Jerky", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté", "Super-Spicy Fish Dango", "Sautéed Pheasant and Eggs", "Garreg Mach Meat Pie", "Cheesy Verona Stew", "Pickled Seafood and Vegetables", "Gautier Cheese Gratin", "Cabbage and Herring Stew"],
+    "supports": ["Edelgard", "Ferdinand", "Linhardt", "Caspar", "Bernadetta", "Dorothea", "Petra", "Hanneman", "Shamir"]
+  },
+  "Ferdinand": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Pheasant Roast with Berry Sauce", "Daphnel Stew", "Vegetable Pasta Salad", "Onion Gratin Soup", "Vegetable Stir-Fry", "Grilled Herring", "Fruit and Herring Tart", "Fisherman’s Bounty", "Fish Sandwich", "Bourgeois Pike", "Sautéed Pheasant and Eggs"],
+    "supports": ["Edelgard", "Hubert", "Linhardt", "Caspar", "Bernadetta", "Dorothea", "Petra", "Mercedes", "Lorenz", "Marianne", "Hilda", "Flayn", "Manuela", "Constance"]
+  },
+  "Linhardt": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Pheasant Roast with Berry Sauce", "Peach Sorbet", "Daphnel Stew", "Onion Gratin Soup", "Fish and Bean Soup", "Garreg Mach Meat Pie", "Gautier Cheese Gratin"],
+    "supports": ["Edelgard", "Hubert", "Ferdinand", "Caspar", "Bernadetta", "Dorothea", "Petra", "Annette", "Lysithea", "Marianne", "Flayn", "Hanneman", "Catherine", "Hapi"]
+  },
+  "Caspar": {
+    "meals": ["Sweet Bun Trio", "Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Daphnel Stew", "Gronder Meat Skewers", "Derdriu-Style Fried Pheasant", "Vegetable Pasta Salad", "Country-Style Red Turnip Plate", "Vegetable Stir-Fry", "Sautéed Jerky", "Sautéed Pheasant and Eggs", "Garreg Mach Meat Pie"],
+    "supports": ["Edelgard", "Hubert", "Ferdinand", "Linhardt", "Bernadetta", "Dorothea", "Petra", "Ashe", "Annette", "Raphael", "Hilda", "Catherine", "Shamir"]
+  },
+  "Bernadetta": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Peach Sorbet", "Derdriu-Style Fried Pheasant", "Vegetable Pasta Salad", "Country-Style Red Turnip Plate", "Vegetable Stir-Fry", "Fruit and Herring Tart", "Two-Fish Sauté", "Bourgeois Pike", "Cheesy Verona Stew"],
+    "supports": ["Edelgard", "Hubert", "Ferdinand", "Linhardt", "Caspar", "Dorothea", "Petra", "Felix", "Sylvain", "Ingrid", "Raphael", "Leonie", "Seteth", "Alois", "Jeritza", "Yuri"]
+  },
+  "Dorothea": {
+    "meals": ["Saghert and Cream", "Peach Sorbet", "Vegetable Pasta Salad", "Onion Gratin Soup", "Country-Style Red Turnip Plate", "Vegetable Stir-Fry", "Garreg Mach Meat Pie", "Gautier Cheese Gratin"],
+    "supports": ["Edelgard", "Hubert", "Ferdinand", "Linhardt", "Caspar", "Bernadetta", "Petra", "Felix", "Sylvain", "Ingrid", "Lorenz", "Hanneman", "Manuela", "Yuri"]
+  },
+  "Petra": {
+    "meals": ["Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Daphnel Stew", "Gronder Meat Skewers", "Country-Style Red Turnip Plate", "Vegetable Stir-Fry", "Grilled Herring", "Fisherman’s Bounty", "Fish Sandwich", "Sautéed Jerky", "Spicy Fish and Turnip Stew", "Super-Spicy Fish Dango", "Cheesy Verona Stew", "Pickled Seafood and Vegetables"],
+    "supports": ["Edelgard", "Claude", "Hubert", "Ferdinand", "Linhardt", "Caspar", "Bernadetta", "Dorothea", "Ashe", "Ignatz", "Alois", "Shamir", "Cyril"]
+  },
+  "Dimitri": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Onion Gratin Soup", "Sautéed Jerky", "Cheesy Verona Stew", "Gautier Cheese Gratin"],
+    "supports": ["Dedue", "Felix", "Ashe", "Sylvain", "Mercedes", "Annette", "Ingrid", "Raphael", "Marianne", "Flayn", "Gilbert", "Alois", "Catherine", "Hapi"]
+  },
+  "Dedue": {
+    "meals": ["Daphnel Stew", "Onion Gratin Soup", "Vegetable Stir-Fry", "Grilled Herring", "Fish and Bean Soup", "Fruit and Herring Tart", "Fisherman’s Bounty", "Fish Sandwich", "Two-Fish Sauté", "Bourgeois Pike", "Sautéed Jerky", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté", "Super-Spicy Fish Dango", "Pickled Seafood and Vegetables"],
+    "supports": ["Dimitri", "Felix", "Ashe", "Sylvain", "Mercedes", "Annette", "Ingrid", "Flayn", "Gilbert", "Shamir"]
+  },
+  "Felix": {
+    "meals": ["Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Daphnel Stew", "Gronder Meat Skewers", "Derdriu-Style Fried Pheasant", "Two-Fish Sauté", "Sautéed Jerky", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté", "Super-Spicy Fish Dango", "Sautéed Pheasant and Eggs", "Garreg Mach Meat Pie", "Gautier Cheese Gratin"],
+    "supports": ["Dimitri", "Dedue", "Bernadetta", "Dorothea", "Ashe", "Sylvain", "Mercedes", "Annette", "Ingrid", "Lysithea", "Leonie", "Seteth", "Flayn"]
+  },
+  "Ashe": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Pheasant Roast with Berry Sauce", "Peach Sorbet", "Vegetable Pasta Salad", "Fish and Bean Soup", "Fish Sandwich", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté"],
+    "supports": ["Dimitri", "Caspar", "Petra", "Dedue", "Felix", "Sylvain", "Mercedes", "Annette", "Ingrid", "Marianne", "Gilbert", "Catherine", "Cyril", "Hapi"]
+  },
+  "Sylvain": {
+    "meals": ["Sweet Bun Trio", "Pheasant Roast with Berry Sauce", "Fish and Bean Soup", "Fruit and Herring Tart", "Fish Sandwich", "Two-Fish Sauté", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté", "Super-Spicy Fish Dango", "Sautéed Pheasant and Eggs", "Garreg Mach Meat Pie", "Cheesy Verona Stew"],
+    "supports": ["Dimitri", "Bernadetta", "Dorothea", "Dedue", "Felix", "Ashe", "Mercedes", "Annette", "Ingrid", "Lorenz", "Lysithea", "Marianne", "Hilda", "Leonie", "Flayn", "Manuela"]
+  },
+  "Mercedes": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Pheasant Roast with Berry Sauce", "Peach Sorbet", "Vegetable Pasta Salad", "Onion Gratin Soup", "Grilled Herring", "Fish and Bean Soup", "Fruit and Herring Tart", "Two-Fish Sauté"],
+    "supports": ["Dimitri", "Ferdinand", "Dedue", "Felix", "Ashe", "Sylvain", "Annette", "Ingrid", "Lorenz", "Ignatz", "Hilda", "Alois", "Cyril", "Jeritza", "Constance"]
+  },
+  "Annette": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Pheasant Roast with Berry Sauce", "Peach Sorbet", "Vegetable Pasta Salad", "Onion Gratin Soup", "Vegetable Stir-Fry", "Grilled Herring", "Fish and Bean Soup", "Fruit and Herring Tart", "Two-Fish Sauté", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté", "Pickled Seafood and Vegetables"],
+    "supports": ["Dimitri", "Claude", "Linhardt", "Caspar", "Dedue", "Felix", "Ashe", "Sylvain", "Mercedes", "Ingrid", "Lysithea", "Hilda", "Hanneman", "Gilbert"]
+  },
+  "Ingrid": {
+    "meals": ["Sweet Bun Trio", "Pheasant Roast with Berry Sauce", "Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Daphnel Stew", "Gronder Meat Skewers", "Derdriu-Style Fried Pheasant", "Vegetable Pasta Salad", "Grilled Herring", "Fruit and Herring Tart", "Fisherman’s Bounty", "Fish Sandwich", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté", "Super-Spicy Fish Dango"],
+    "supports": ["Dimitri", "Claude", "Bernadetta", "Dorothea", "Dedue", "Felix", "Ashe", "Sylvain", "Mercedes", "Annette", "Raphael", "Ignatz", "Seteth", "Catherine", "Yuri"]
+  },
+  "Claude": {
+    "meals": ["Pheasant Roast with Berry Sauce", "Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Daphnel Stew", "Gronder Meat Skewers", "Derdriu-Style Fried Pheasant", "Onion Gratin Soup", "Country-Style Red Turnip Plate", "Vegetable Stir-Fry", "Bourgeois Pike", "Sautéed Jerky", "Sautéed Pheasant and Eggs", "Garreg Mach Meat Pie", "Cheesy Verona Stew", "Gautier Cheese Gratin", "Cabbage and Herring Stew"],
+    "supports": ["Petra", "Annette", "Ingrid", "Lorenz", "Raphael", "Ignatz", "Lysithea", "Marainne", "Hilda", "Leonie", "Flayn", "Shamir", "Cyril", "Balthus"]
+  },
+  "Lorenz": {
+    "meals": ["Saghert and Cream", "Daphnel Stew", "Onion Gratin Soup", "Fish and Bean Soup", "Fruit and Herring Tart", "Two-Fish Sauté", "Bourgeois Pike", "Garreg Mach Meat Pie", "Cabbage and Herring Stew"],
+    "supports": ["Claude", "Ferdinand", "Dorothea", "Sylvain", "Mercedes", "Raphael", "Ignatz", "Lysithea", "Marianne", "Hilda", "Leonie", "Manuela", "Catherine"]
+  },
+  "Raphael": {
+    "meals": ["Pheasant Roast with Berry Sauce", "Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Daphnel Stew", "Gronder Meat Skewers", "Derdriu-Style Fried Pheasant", "Country-Style Red Turnip Plate", "Fish and Bean Soup", "Fisherman’s Bounty", "Fish Sandwich", "Sautéed Jerky", "Sautéed Pheasant and Eggs", "Garreg Mach Meat Pie", "Cheesy Verona Stew", "Pickled Seafood and Vegetables", "Gautier Cheese Gratin"],
+    "supports": ["Dimitri", "Claude", "Caspar", "Bernadetta", "Ingrid", "Lorenz", "Ignatz", "Lysithea", "Marianne", "Hilda", "Leonie", "Flayn", "Shamir"]
+  },
+  "Ignatz": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Vegetable Pasta Salad", "Vegetable Stir-Fry", "Fish and Bean Soup", "Fruit and Herring Tart", "Fisherman’s Bounty", "Two-Fish Sauté", "Bourgeois Pike", "Super-Spicy Fish Dango", "Sautéed Pheasant and Eggs", "Garreg Mach Meat Pie", "Cabbage and Herring Stew"],
+    "supports": ["Claude", "Petra", "Mercedes", "Ingrid", "Lorenz", "Raphael", "Lysithea", "Marianne", "Hilda", "Leonie", "Flayn", "Shamir", "Cyril"]
+  },
+  "Lysithea": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Pheasant Roast with Berry Sauce", "Peach Sorbet", "Pickled Rabbit Skewers", "Derdriu-Style Fried Pheasant", "Two-Fish Sauté"],
+    "supports": ["Edelgard", "Claude", "Linhardt", "Felix", "Sylvain", "Annette", "Lorenz", "Raphael", "Ignatz", "Marianne", "Hilda", "Leonie", "Hanneman", "Catherine", "Cyril", "Balthus"]
+  },
+  "Marianne": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Peach Sorbet", "Vegetable Pasta Salad", "Onion Gratin Soup", "Vegetable Stir-Fry", "Fish and Bean Soup", "Fruit and Herring Tart", "Fisherman’s Bounty", "Two-Fish Sauté", "Bourgeois Pike", "Super-Spicy Fish Dango", "Sautéed Pheasant and Eggs", "Cheesy Verona Stew", "Cabbage and Herring Stew"],
+    "supports": ["Dimitri", "Claude", "Ferdinand", "Linhardt", "Ashe", "Sylvain", "Lorenz", "Raphael", "Ignatz", "Lysithea", "Hilda", "Leonie", "Hanneman"]
+  },
+  "Hilda": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Peach Sorbet", "Derdriu-Style Fried Pheasant", "Country-Style Red Turnip Plate", "Fish and Bean Soup", "Fisherman’s Bounty", "Two-Fish Sauté", "Cheesy Verona Stew", "Gautier Cheese Gratin"],
+    "supports": ["Claude", "Ferdinand", "Caspar", "Sylvain", "Mercedes", "Annette", "Lorenz", "Raphael", "Ignatz", "Lysithea", "Marianne", "Leonie", "Seteth", "Cyril", "Balthus"]
+  },
+  "Leonie": {
+    "meals": ["Beast Meat Teppanyaki", "Daphnel Stew", "Gronder Meat Skewers", "Derdriu-Style Fried Pheasant", "Onion Gratin Soup", "Vegetable Stir-Fry", "Grilled Herring", "Fish and Bean Soup", "Fruit and Herring Tart", "Fisherman’s Bounty", "Fish Sandwich", "Two-Fish Sauté", "Bourgeois Pike", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté", "Super-Spicy Fish Dango", "Cheesy Verona Stew", "Pickled Seafood and Vegetables", "Cabbage and Herring Stew"],
+    "supports": ["Claude", "Bernadetta", "Felix", "Sylvain", "Lorenz", "Raphael", "Ignatz", "Lysithea", "Marianne", "Hilda", "Seteth", "Alois", "Catherine", "Shamir"]
+  },
+  "Seteth": {
+    "meals": ["Daphnel Stew", "Derdriu-Style Fried Pheasant", "Vegetable Pasta Salad", "Grilled Herring", "Fruit and Herring Tart", "Fish Sandwich", "Bourgeois Pike", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté", "Super-Spicy Fish Dango", "Sautéed Pheasant and Eggs", "Cheesy Verona Stew", "Pickled Seafood and Vegetables"],
+    "supports": ["Bernadetta", "Felix", "Ingrid", "Hilda", "Leonie", "Flayn", "Hanneman", "Manuela", "Catherine", "Cyril"]
+  },
+  "Flayn": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Pheasant Roast with Berry Sauce", "Peach Sorbet", "Onion Gratin Soup", "Country-Style Red Turnip Plate", "Grilled Herring", "Fish and Bean Soup", "Fruit and Herring Tart", "Fisherman’s Bounty", "Fish Sandwich", "Two-Fish Sauté", "Bourgeois Pike", "Cheesy Verona Stew", "Pickled Seafood and Vegetables", "Cabbage and Herring Stew"],
+    "supports": ["Dimitri", "Claude", "Ferdinand", "Linhardt", "Dedue", "Felix", "Sylvain", "Raphael", "Ignatz", "Seteth", "Manuela"]
+  },
+  "Hanneman": {
+    "meals": ["Peach Sorbet", "Derdriu-Style Fried Pheasant", "Vegetable Pasta Salad", "Two-Fish Sauté", "Bourgeois Pike", "Super-Spicy Fish Dango", "Garreg Mach Meat Pie", "Cheesy Verona Stew", "Pickled Seafood and Vegetables", "Gautier Cheese Gratin", "Cabbage and Herring Stew"],
+    "supports": ["Edelgard", "Hubert", "Linhardt", "Dorothea", "Annette", "Lysithea", "Marianne", "Seteth", "Manuela", "Gilbert", "Alois"]
+  },
+  "Manuela": {
+    "meals": ["Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Daphnel Stew", "Gronder Meat Skewers", "Derdriu-Style Fried Pheasant", "Vegetable Stir-Fry", "Fish and Bean Soup", "Fisherman’s Bounty", "Fish Sandwich", "Two-Fish Sauté", "Bourgeois Pike", "Sautéed Jerky", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté", "Super-Spicy Fish Dango", "Sautéed Pheasant and Eggs", "Garreg Mach Meat Pie", "Cabbage and Herring Stew"],
+    "supports": ["Edelgard", "Ferdinand", "Dorothea", "Sylvain", "Lorenz", "Seteth", "Flayn", "Hanneman", "Gilbert", "Alois", "Cyril"]
+  },
+  "Gilbert": {
+    "meals": ["Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Gronder Meat Skewers", "Derdriu-Style Fried Pheasant", "Vegetable Pasta Salad", "Country-Style Red Turnip Plate", "Vegetable Stir-Fry", "Grilled Herring", "Fisherman’s Bounty", "Fish Sandwich", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté", "Super-Spicy Fish Dango", "Sautéed Pheasant and Eggs", "Garreg Mach Meat Pie", "Cheesy Verona Stew", "Pickled Seafood and Vegetables", "Cabbage and Herring Stew"],
+    "supports": ["Dimitri", "Dedue", "Ashe", "Annette", "Hanneman", "Manuela", "Alois", "Catherine"]
+  },
+  "Alois": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Pheasant Roast with Berry Sauce", "Peach Sorbet", "Onion Gratin Soup", "Grilled Herring", "Fish and Bean Soup", "Fruit and Herring Tart", "Fisherman’s Bounty", "Fish Sandwich", "Two-Fish Sauté", "Bourgeois Pike", "Pickled Seafood and Vegetables"],
+    "supports": ["Dimitri", "Bernadetta", "Petra", "Mercedes", "Leonie", "Hanneman", "Manuela", "Gilbert", "Catherine", "Shamir"]
+  },
+  "Catherine": {
+    "meals": ["Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Gronder Meat Skewers", "Derdriu-Style Fried Pheasant", "Onion Gratin Soup", "Country-Style Red Turnip Plate", "Grilled Herring", "Fruit and Herring Tart", "Fisherman’s Bounty", "Fish Sandwich", "Two-Fish Sauté", "Bourgeois Pike", "Super-Spicy Fish Dango", "Garreg Mach Meat Pie", "Cheesy Verona Stew", "Pickled Seafood and Vegetables", "Gautier Cheese Gratin", "Cabbage and Herring Stew"],
+    "supports": ["Dimitri", "Linhardt", "Caspar", "Ashe", "Ingrid", "Lorenz", "Lysithea", "Leonie", "Seteth", "Gilbert", "Alois", "Shamir"]
+  },
+  "Shamir": {
+    "meals": ["Pheasant Roast with Berry Sauce", "Peach Sorbet", "Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Daphnel Stew", "Gronder Meat Skewers", "Vegetable Pasta Salad", "Country-Style Red Turnip Plate", "Vegetable Stir-Fry", "Sautéed Jerky", "Super-Spicy Fish Dango", "Sautéed Pheasant and Eggs"],
+    "supports": ["Claude", "Hubert", "Caspar", "Petra", "Dedue", "Raphael", "Ignatz", "Leonie", "Alois", "Catherine", "Cyril"]
+  },
+  "Cyril": {
+    "meals": ["Pheasant Roast with Berry Sauce", "Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Daphnel Stew", "Gronder Meat Skewers", "Derdriu-Style Fried Pheasant", "Vegetable Pasta Salad", "Vegetable Stir-Fry", "Fish and Bean Soup", "Two-Fish Sauté", "Sautéed Jerky", "Sautéed Pheasant and Eggs"],
+    "supports": ["Claude", "Petra", "Ashe", "Mercedes", "Ignatz", "Lysithea", "Hilda", "Seteth", "Manuela", "Shamir"]
+  },
+  "Jeritza": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Pheasant Roast with Berry Sauce", "Peach Sorbet", "Gronder Meat Skewers", "Onion Gratin Soup", "Grilled Herring", "Fish and Bean Soup", "Fisherman’s Bounty", "Two-Fish Sauté", "Cabbage and Herring Stew", "Small Fish Skewers", "Fried Crayfish"],
+    "supports": ["Bernadetta", "Mercedes", "Constance"]
+  },
+  "Anna": {
+    "meals": ["Pheasant Roast with Berry Sauce", "Peach Sorbet", "Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Derdriu-Style Fried Pheasant", "Vegetable Pasta Salad", "Bourgeois Pike", "Sautéed Jerky", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté", "Sautéed Pheasant and Eggs", "Pickled Seafood and Vegetables", "Fried Crayfish"],
+    "supports": []
+  },
+  "Yuri": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Pheasant Roast with Berry Sauce", "Peach Sorbet", "Pickled Rabbit Skewers", "Daphnel Stew", "Onion Gratin Soup", "Country-Style Red Turnip Plate", "Vegetable Stir-Fry", "Grilled Herring", "Fish and Bean Soup", "Fisherman’s Bounty", "Fish Sandwich", "Two-Fish Sauté", "Sautéed Jerky"],
+    "supports": ["Bernadetta", "Dorothea", "Ingrid", "Balthus", "Constance", "Hapi"]
+  },
+  "Balthus": {
+    "meals": ["Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Daphnel Stew", "Gronder Meat Skewers", "Derdriu-Style Fried Pheasant", "Fisherman’s Bounty", "Sautéed Jerky", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté", "Super-Spicy Fish Dango", "Garreg Mach Meat Pie", "Cheesy Verona Stew", "Gautier Cheese Gratin", "Cabbage and Herring Stew"],
+    "supports": ["Claude", "Lysithea", "Hilda", "Yuri", "Constance", "Hapi"]
+  },
+  "Constance": {
+    "meals": ["Saghert and Cream", "Sweet Bun Trio", "Pheasant Roast with Berry Sauce", "Peach Sorbet", "Vegetable Pasta Salad", "Fruit and Herring Tart", "Two-Fish Sauté", "Bourgeois Pike", "Sautéed Pheasant and Eggs"],
+    "supports": ["Edelgard", "Ferdinand", "Mercedes", "Jeritza", "Yuri", "Balthus", "Hapi"]
+  },
+  "Hapi": {
+    "meals": ["Pheasant Roast with Berry Sauce", "Beast Meat Teppanyaki", "Pickled Rabbit Skewers", "Daphnel Stew", "Gronder Meat Skewers", "Derdriu-Style Fried Pheasant", "Onion Gratin Soup", "Country-Style Red Turnip Plate", "Vegetable Stir-Fry", "Fish and Bean Soup", "Fisherman’s Bounty", "Fish Sandwich", "Sautéed Jerky", "Spicy Fish and Turnip Stew", "Sweet and Salty Whitefish Sauté", "Super-Spicy Fish Dango", "Sautéed Pheasant and Eggs", "Pickled Seafood and Vegetables", "Cabbage and Herring Stew", "Small Fish Skewers", "Fried Crayfish"],
+    "supports": ["Dimitri", "Linhardt", "Ashe", "Yuri", "Balthus", "Constance"]
+  }
 };
 
 /***/ }),

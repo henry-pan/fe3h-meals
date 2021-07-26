@@ -25,24 +25,26 @@ class App extends React.Component {
   findMeals(char1, char2) {
     const mealHash = {};
     const sharedMeals = [];
-    characters[char1].forEach(meal => mealHash[meal] = true);
-    characters[char2].forEach(meal => {
-      if (mealHash[meal]) sharedMeals.push(meal);
-    });
+    characters[char1]["meals"].forEach(meal => mealHash[meal] = true);
+    characters[char2]["meals"].forEach(meal => { if (mealHash[meal]) sharedMeals.push(meal)} );
     if (sharedMeals.length === 0) return <li>None!</li>;
     return sharedMeals.map(i => <li key={i}>{i}</li>);
   }
 
 
   mapChars(arr) {
-    const picked = this.state.selectedChars.length >= 2;
+    const { selectedChars } = this.state;
+    const isPicked = selectedChars.length >= 2;
+    const isFirstPick = selectedChars[0] && !selectedChars[1]; // Hides supports after picking second character
+
     return arr.map(i => 
-      <div className={(!this.state.selectedChars.includes(i) && picked) ? "character disabled" : "character"} key={i}>
+      <div className={(!selectedChars.includes(i) && isPicked) ? "character disabled" : "character"} key={i}>
         <label>
           <input type="checkbox"
             onChange={() => this.handleCheckbox(i)}
-            disabled={!this.state.selectedChars.includes(i) && picked}/>
+            disabled={!selectedChars.includes(i) && isPicked}/>
           {i}
+          {isFirstPick && characters[selectedChars[0]]["supports"].includes(i) && <img className="support-icon" src="img/support.png" />}
         </label>
       </div>
     );
@@ -73,6 +75,7 @@ class App extends React.Component {
         <header>
           <h1><img src="img/meal.png" />Shared Meal Finder</h1>
           <p>Click on two characters to determine which meals they both like.</p>
+          <p>After clicking on the first character, an icon will appear on all characters they can support.</p>
         </header>
         <section className="character-tables-container">
           <div className="character-table">

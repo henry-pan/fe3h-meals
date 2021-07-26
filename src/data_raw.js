@@ -1,55 +1,57 @@
+// Run `node data_raw.js > data.json` in terminal to generate data json.
+
 const characters = {
   // Black Eagles
-  "Edelgard": [],
-  "Hubert": [],
-  "Ferdinand": [],
-  "Linhardt": [],
-  "Caspar": [],
-  "Bernadetta": [],
-  "Dorothea": [],
-  "Petra": [],
+  "Edelgard": { "meals": [], "supports": [] },
+  "Hubert": { "meals": [], "supports": [] },
+  "Ferdinand": { "meals": [], "supports": [] },
+  "Linhardt": { "meals": [], "supports": [] },
+  "Caspar": { "meals": [], "supports": [] },
+  "Bernadetta": { "meals": [], "supports": [] },
+  "Dorothea": { "meals": [], "supports": [] },
+  "Petra": { "meals": [], "supports": [] },
   
   // Blue Lions
-  "Dimitri": [],
-  "Dedue": [],
-  "Felix": [],
-  "Ashe": [],
-  "Sylvain": [],
-  "Mercedes": [],
-  "Annette": [],
-  "Ingrid": [],
+  "Dimitri": { "meals": [], "supports": [] },
+  "Dedue": { "meals": [], "supports": [] },
+  "Felix": { "meals": [], "supports": [] },
+  "Ashe": { "meals": [], "supports": [] },
+  "Sylvain": { "meals": [], "supports": [] },
+  "Mercedes": { "meals": [], "supports": [] },
+  "Annette": { "meals": [], "supports": [] },
+  "Ingrid": { "meals": [], "supports": [] },
 
   // Golden Deer
-  "Claude": [],
-  "Lorenz": [],
-  "Raphael": [],
-  "Ignatz": [],
-  "Lysithea": [],
-  "Marianne": [],
-  "Hilda": [],
-  "Leonie": [],
+  "Claude": { "meals": [], "supports": [] },
+  "Lorenz": { "meals": [], "supports": [] },
+  "Raphael": { "meals": [], "supports": [] },
+  "Ignatz": { "meals": [], "supports": [] },
+  "Lysithea": { "meals": [], "supports": [] },
+  "Marianne": { "meals": [], "supports": [] },
+  "Hilda": { "meals": [], "supports": [] },
+  "Leonie": { "meals": [], "supports": [] },
 
   // Church of Seiros
-  "Seteth": [],
-  "Flayn": [],
-  "Hanneman": [],
-  "Manuela": [],
-  "Gilbert": [],
-  "Alois": [],
-  "Catherine": [],
-  "Shamir": [],
-  "Cyril": [],
+  "Seteth": { "meals": [], "supports": [] },
+  "Flayn": { "meals": [], "supports": [] },
+  "Hanneman": { "meals": [], "supports": [] },
+  "Manuela": { "meals": [], "supports": [] },
+  "Gilbert": { "meals": [], "supports": [] },
+  "Alois": { "meals": [], "supports": [] },
+  "Catherine": { "meals": [], "supports": [] },
+  "Shamir": { "meals": [], "supports": [] },
+  "Cyril": { "meals": [], "supports": [] },
 
   // DLC
-  "Jeritza": [],
-  "Anna": [],
-  "Yuri": [],
-  "Balthus": [],
-  "Constance": [],
-  "Hapi": []
+  "Jeritza": { "meals": [], "supports": [] },
+  "Anna": { "meals": [], "supports": [] },
+  "Yuri": { "meals": [], "supports": [] },
+  "Balthus": { "meals": [], "supports": [] },
+  "Constance": { "meals": [], "supports": [] },
+  "Hapi": { "meals": [], "supports": [] }
 }
 
-// Meal data obtained from Serenes Forest
+// Raw data obtained from Serenes Forest
 const mealsRaw = {
   "Saghert and Cream":"Edelgard, Dimitri, Ferdinand, Linhardt, Bernadetta, Dorothea, Ashe, Mercedes, Annette, Lorenz, Ignatz, Lysithea, Marianne, Hilda, Flayn, Alois, Yuri, Constance, Jeritza",
   "Sweet Bun Trio":"Edelgard, Dimitri, Ferdinand, Linhardt, Caspar, Bernadetta, Ashe, Sylvain, Mercedes, Annette, Ingrid, Ignatz, Lysithea, Marianne, Hilda, Flayn, Alois, Yuri, Constance, Jeritza",
@@ -85,9 +87,61 @@ const mealsRaw = {
   "Fried Crayfish":"Hapi, Jeritza, Anna"
 }
 
+const supportsRaw = {
+  "Edelgard":"Hubert, Ferdinand, Linhardt, Caspar, Bernadetta, Dorothea, Petra, Lysithea, Hanneman, Manuela, Constance",
+  "Hubert":"Edelgard, Ferdinand, Linhardt, Caspar, Bernadetta, Dorothea, Petra, Hanneman, Shamir",
+  "Ferdinand":"Edelgard, Hubert, Linhardt, Caspar, Bernadetta, Dorothea, Petra, Mercedes, Lorenz, Marianne, Hilda, Flayn, Manuela, Constance",
+  "Linhardt":"Edelgard, Hubert, Ferdinand, Caspar, Bernadetta, Dorothea, Petra, Annette, Lysithea, Marianne, Flayn, Hanneman, Catherine, Hapi",
+  "Caspar":"Edelgard, Hubert, Ferdinand, Linhardt, Bernadetta, Dorothea, Petra, Ashe, Annette, Raphael, Hilda, Catherine, Shamir",
+  "Bernadetta":"Edelgard, Hubert, Ferdinand, Linhardt, Caspar, Dorothea, Petra, Felix, Sylvain, Ingrid, Raphael, Leonie, Seteth, Alois, Jeritza, Yuri",
+  "Dorothea":"Edelgard, Hubert, Ferdinand, Linhardt, Caspar, Bernadetta, Petra, Felix, Sylvain, Ingrid, Lorenz, Hanneman, Manuela, Yuri",
+  "Petra":"Edelgard, Claude, Hubert, Ferdinand, Linhardt, Caspar, Bernadetta, Dorothea, Ashe, Ignatz, Alois, Shamir, Cyril",
+  
+  "Dimitri":"Dedue, Felix, Ashe, Sylvain, Mercedes, Annette, Ingrid, Raphael, Marianne, Flayn, Gilbert, Alois, Catherine, Hapi",
+  "Dedue":"Dimitri, Felix, Ashe, Sylvain, Mercedes, Annette, Ingrid, Flayn, Gilbert, Shamir",
+  "Felix":"Dimitri, Dedue, Bernadetta, Dorothea, Ashe, Sylvain, Mercedes, Annette, Ingrid, Lysithea, Leonie, Seteth, Flayn",
+  "Ashe":"Dimitri, Caspar, Petra, Dedue, Felix, Sylvain, Mercedes, Annette, Ingrid, Marianne, Gilbert, Catherine, Cyril, Hapi",
+  "Sylvain":"Dimitri, Bernadetta, Dorothea, Dedue, Felix, Ashe, Mercedes, Annette, Ingrid, Lorenz, Lysithea, Marianne, Hilda, Leonie, Flayn, Manuela",
+  "Mercedes":"Dimitri, Ferdinand, Dedue, Felix, Ashe, Sylvain, Annette, Ingrid, Lorenz, Ignatz, Hilda, Alois, Cyril, Jeritza, Constance",
+  "Annette":"Dimitri, Claude, Linhardt, Caspar, Dedue, Felix, Ashe, Sylvain, Mercedes, Ingrid, Lysithea, Hilda, Hanneman, Gilbert",
+  "Ingrid":"Dimitri, Claude, Bernadetta, Dorothea, Dedue, Felix, Ashe, Sylvain, Mercedes, Annette, Raphael, Ignatz, Seteth, Catherine, Yuri",
+  
+  "Claude":"Petra, Annette, Ingrid, Lorenz, Raphael, Ignatz, Lysithea, Marainne, Hilda, Leonie, Flayn, Shamir, Cyril, Balthus",
+  "Lorenz":"Claude, Ferdinand, Dorothea, Sylvain, Mercedes, Raphael, Ignatz, Lysithea, Marianne, Hilda, Leonie, Manuela, Catherine",
+  "Raphael":"Dimitri, Claude, Caspar, Bernadetta, Ingrid, Lorenz, Ignatz, Lysithea, Marianne, Hilda, Leonie, Flayn, Shamir",
+  "Ignatz":"Claude, Petra, Mercedes, Ingrid, Lorenz, Raphael, Lysithea, Marianne, Hilda, Leonie, Flayn, Shamir, Cyril",
+  "Lysithea":"Edelgard, Claude, Linhardt, Felix, Sylvain, Annette, Lorenz, Raphael, Ignatz, Marianne, Hilda, Leonie, Hanneman, Catherine, Cyril, Balthus",
+  "Marianne":"Dimitri, Claude, Ferdinand, Linhardt, Ashe, Sylvain, Lorenz, Raphael, Ignatz, Lysithea, Hilda, Leonie, Hanneman",
+  "Hilda":"Claude, Ferdinand, Caspar, Sylvain, Mercedes, Annette, Lorenz, Raphael, Ignatz, Lysithea, Marianne, Leonie, Seteth, Cyril, Balthus",
+  "Leonie":"Claude, Bernadetta, Felix, Sylvain, Lorenz, Raphael, Ignatz, Lysithea, Marianne, Hilda, Seteth, Alois, Catherine, Shamir",
+  
+  "Seteth":"Bernadetta, Felix, Ingrid, Hilda, Leonie, Flayn, Hanneman, Manuela, Catherine, Cyril",
+  "Flayn":"Dimitri, Claude, Ferdinand, Linhardt, Dedue, Felix, Sylvain, Raphael, Ignatz, Seteth, Manuela",
+  "Hanneman":"Edelgard, Hubert, Linhardt, Dorothea, Annette, Lysithea, Marianne, Seteth, Manuela, Gilbert, Alois",
+  "Manuela":"Edelgard, Ferdinand, Dorothea, Sylvain, Lorenz, Seteth, Flayn, Hanneman, Gilbert, Alois, Cyril",
+  "Gilbert":"Dimitri, Dedue, Ashe, Annette, Hanneman, Manuela, Alois, Catherine",
+  "Alois":"Dimitri, Bernadetta, Petra, Mercedes, Leonie, Hanneman, Manuela, Gilbert, Catherine, Shamir",
+  "Catherine":"Dimitri, Linhardt, Caspar, Ashe, Ingrid, Lorenz, Lysithea, Leonie, Seteth, Gilbert, Alois, Shamir",
+  "Shamir":"Claude, Hubert, Caspar, Petra, Dedue, Raphael, Ignatz, Leonie, Alois, Catherine, Cyril",
+  "Cyril":"Claude, Petra, Ashe, Mercedes, Ignatz, Lysithea, Hilda, Seteth, Manuela, Shamir",
+  
+  "Jeritza":"Bernadetta, Mercedes, Constance",
+  "Yuri":"Bernadetta, Dorothea, Ingrid, Balthus, Constance, Hapi",
+  "Balthus":"Claude, Lysithea, Hilda, Yuri, Constance, Hapi",
+  "Constance":"Edelgard, Ferdinand, Mercedes, Jeritza, Yuri, Balthus, Hapi",
+  "Hapi":"Dimitri, Linhardt, Ashe, Yuri, Balthus, Constance"
+}
+
 for (const meal in mealsRaw) {
   const likersArr = mealsRaw[meal].split(",").map(x => x.trim());
   likersArr.forEach(liker => {
-    characters[liker].push(`${meal}`);
+    characters[liker]["meals"].push(`${meal}`);
   });
 }
+
+for (const character in supportsRaw) {
+  const supportsArr = supportsRaw[character].split(",").map(x => x.trim());
+  characters[character]["supports"] = supportsArr;
+}
+
+console.log(JSON.stringify(characters));
