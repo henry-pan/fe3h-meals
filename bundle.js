@@ -95,6 +95,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       _data_js__WEBPACK_IMPORTED_MODULE_1__.characters[char2].forEach(function (meal) {
         if (mealHash[meal]) sharedMeals.push(meal);
       });
+      if (sharedMeals.length === 0) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "None!");
       return sharedMeals.map(function (i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: i
@@ -106,15 +107,17 @@ var App = /*#__PURE__*/function (_React$Component) {
     value: function mapChars(arr) {
       var _this2 = this;
 
+      var picked = this.state.selectedChars.length >= 2;
       return arr.map(function (i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: !_this2.state.selectedChars.includes(i) && picked ? "character disabled" : "character",
           key: i
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "checkbox",
           onChange: function onChange() {
             return _this2.handleCheckbox(i);
           },
-          disabled: !_this2.state.selectedChars.includes(i) && _this2.state.selectedChars.length >= 2
+          disabled: !_this2.state.selectedChars.includes(i) && picked
         }), i));
       });
     }
@@ -124,38 +127,58 @@ var App = /*#__PURE__*/function (_React$Component) {
       var eagles = ["Edelgard", "Hubert", "Ferdinand", "Linhardt", "Caspar", "Bernadetta", "Dorothea", "Petra"];
       var lions = ["Dimitri", "Dedue", "Felix", "Ashe", "Sylvain", "Mercedes", "Annette", "Ingrid"];
       var deer = ["Claude", "Lorenz", "Raphael", "Ignatz", "Lysithea", "Marianne", "Hilda", "Leonie"];
-      var church = ["Seteth", "Flayn", "Hanneman", "Manuela", "Gilbert", "Alois", "Catherine", "Shamir", "Cyril"];
-      var dlc = ["Yuri", "Balthus", "Constance", "Hapi", "Jeritza", "Anna"];
+      var church = ["Seteth", "Flayn", "Hanneman", "Manuela", "Gilbert", "Alois", "Catherine", "Shamir", "Cyril", "Jeritza", "Anna"];
+      var dlc = ["Yuri", "Balthus", "Constance", "Hapi"];
       var mealSection;
 
       if (this.state.selectedChars.length === 2) {
         var meals;
         meals = this.findMeals(this.state.selectedChars[0], this.state.selectedChars[1]);
-        mealSection = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        mealSection = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
           className: "meals"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, this.state.selectedChars[0], " and ", this.state.selectedChars[1], " both like:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, meals));
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Fire Emblem: Three Houses - Shared Meal Finder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Click on two characters to determine which meals they both like."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "character-tables"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Fire Emblem: Three Houses - Shared Meal Finder"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Click on two characters to determine which meals they both like.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
+        className: "character-tables-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "character-table"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+        id: "be"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "faction-banner",
         src: "img/be.png"
-      }), "Black Eagles"), this.mapChars(eagles)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      }), "Black Eagles"), this.mapChars(eagles)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "character-table"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+        id: "bl"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "faction-banner",
         src: "img/bl.png"
-      }), "Blue Lions"), this.mapChars(lions)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      }), "Blue Lions"), this.mapChars(lions)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "character-table"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+        id: "gd"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "faction-banner",
         src: "img/gd.png"
-      }), "Golden Deer"), this.mapChars(deer)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      }), "Golden Deer"), this.mapChars(deer)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "character-table"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+        id: "church"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "faction-banner",
         src: "img/church.png"
-      }), "Church of Seiros"), this.mapChars(church)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      }), "Church of Seiros"), this.mapChars(church)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "character-table"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+        id: "aw"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "faction-banner",
         src: "img/aw.png"
-      }), "Ashen Wolves / DLC"), this.mapChars(dlc))), mealSection);
+      }), "Ashen Wolves"), this.mapChars(dlc))), mealSection);
     }
   }]);
 

@@ -1,5 +1,29 @@
 body {
-  /* background-color: #362d74; */
+  background-color: #362d74;
+  font-family: 'EB Garamond', serif;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+li {
+  font-size: 18px;
 }
 
 .content {
@@ -9,21 +33,27 @@ body {
   align-items: center;
   flex-direction: column;
   max-width: 960px;
-  margin: 0 auto;
+  margin: 40px auto;
 }
 
-.character-tables {
+.character-tables-container {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-.meals {
+.character-table {
+  width: 170px;
+  border: 1px solid #f0f0f0;
+  box-sizing: border-box;
+}
+
+.character-table h3 {
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-direction: column;
+  font-size: 20px;
+  margin-bottom: 5px;
 }
 
 .faction-banner {
@@ -31,8 +61,50 @@ body {
   margin-right: 8px;
 }
 
-h3 {
+#be {
+  background: linear-gradient(#dc6f6b, #fff);
+}
+
+#bl {
+  background: linear-gradient(#a3cbce, #fff);
+}
+
+#gd {
+  background: linear-gradient(#ebd461, #fff);
+}
+
+#church {
+  background: linear-gradient(#e6e1df, #fff);
+}
+
+#aw {
+  background: linear-gradient(#9b9ca0, #fff);
+}
+
+.character {
+  line-height: 1.8;
+}
+
+.character label {
+  display: inline-block;
+  cursor: pointer;
+  width: 100%;
+}
+
+.character:hover {
+  background-color: #eee;
+}
+
+.disabled, .disabled:hover {
+  background-color: #fff;
+}
+
+.meals {
   display: flex;
+  justify-content: center;
   align-items: center;
-  font-size: 14px;
+  flex-direction: column;
+  width: 100%;
+  border-top: 20px solid #362d74;
+  padding: 20px 0;
 }
