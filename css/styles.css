@@ -89,23 +89,23 @@ li {
 }
 
 #banner-be {
-  background: url('img/banners.png') -0 -0;
+  background: url('../img/banners.png') -0 -0;
 }
 
 #banner-bl {
-  background: url('img/banners.png') -24px -0;
+  background: url('../img/banners.png') -24px -0;
 }
 
 #banner-gd {
-  background: url('img/banners.png') -48px -0;
+  background: url('../img/banners.png') -48px -0;
 }
 
 #banner-church {
-  background: url('img/banners.png') -72px -0;
+  background: url('../img/banners.png') -72px -0;
 }
 
 #banner-aw {
-  background: url('img/banners.png') -96px -0;
+  background: url('../img/banners.png') -96px -0;
 }
 
 #be {
