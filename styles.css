@@ -83,8 +83,29 @@ li {
 }
 
 .faction-banner {
-  width: 24px;
   margin-right: 8px;
+  width: 24px;
+  height: 38px;
+}
+
+#banner-be {
+  background: url('img/banners.png') -0 -0;
+}
+
+#banner-bl {
+  background: url('img/banners.png') -24px -0;
+}
+
+#banner-gd {
+  background: url('img/banners.png') -48px -0;
+}
+
+#banner-church {
+  background: url('img/banners.png') -72px -0;
+}
+
+#banner-aw {
+  background: url('img/banners.png') -96px -0;
 }
 
 #be {

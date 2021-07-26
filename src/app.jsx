@@ -76,23 +76,23 @@ class App extends React.Component {
         </header>
         <section className="character-tables-container">
           <div className="character-table">
-            <h3 id="be"><img className="faction-banner" src="img/be.png" />Black Eagles</h3>
+            <h3 id="be"><span className="faction-banner" id="banner-be" />Black Eagles</h3>
             {this.mapChars(eagles)}
           </div>
           <div className="character-table">
-            <h3 id="bl"><img className="faction-banner" src="img/bl.png" />Blue Lions</h3>
+            <h3 id="bl"><span className="faction-banner" id="banner-bl" />Blue Lions</h3>
             {this.mapChars(lions)}
           </div>
           <div className="character-table">
-            <h3 id="gd"><img className="faction-banner" src="img/gd.png" />Golden Deer</h3>
+            <h3 id="gd"><span className="faction-banner" id="banner-gd" />Golden Deer</h3>
             {this.mapChars(deer)}
           </div>
           <div className="character-table">
-            <h3 id="church"><img className="faction-banner" src="img/church.png" />Church of Seiros</h3>
+            <h3 id="church"><span className="faction-banner" id="banner-church" />Church of Seiros</h3>
             {this.mapChars(church)}
           </div>
           <div className="character-table">
-            <h3 id="aw"><img className="faction-banner" src="img/aw.png" />Ashen Wolves</h3>
+            <h3 id="aw"><span className="faction-banner" id="banner-aw" />Ashen Wolves</h3>
             {this.mapChars(dlc)}
           </div>
         </section>
