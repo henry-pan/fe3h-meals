@@ -71,7 +71,7 @@ class App extends React.Component {
     return (
       <div className="content">
         <header>
-          <h1>Fire Emblem: Three Houses - Shared Meal Finder</h1>
+          <h1><img src="img/meal.png" />Shared Meal Finder</h1>
           <p>Click on two characters to determine which meals they both like.</p>
         </header>
         <section className="character-tables-container">
